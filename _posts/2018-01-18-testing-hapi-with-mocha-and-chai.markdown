@@ -2,7 +2,7 @@
 layout: post
 title:  "Testing Hapi with Mocha and Chai"
 date:   2018-01-18 23:07:59 -0800
-categories: Testing
+categories: Development
 author: matt
 excerpt: "Test Driven development is an evolutionary software programming approach, where you write tests before writing the functional code. TDD approach incorporate programming, testing and refactoring."
 ---
