@@ -8,6 +8,9 @@ excerpt: "Test Driven development is an evolutionary software programming approa
 ---
 <!-- ### What is TDD? -->
 ![Article teaser]({{ "/assets/mocha-teaser.png" | absolute_url }})
+*"Mocha.js",https://mochajs.org/, used under CC / Derivative of original*
+
+
 **Test Driven development** is an evolutionary software programming approach, where you write tests before writing the functional code. TDD approach incorporate programming, testing and refactoring.
 The usual steps taken while following TDD approach is :
 - Individual test is written around a logic, which is meant to fail as no functional code exist.
@@ -121,43 +124,41 @@ my_project->
 
 - Inside the `test.js`, we will write the test using mocha and chai. These test will check whether our API is successfully running or not:
 
-
-```sh
-const assert = require('chai').assert;
-const server = require('../index.js');
-const request = require('http');
-
-
-server.register([{
-    register: require('inject-then')
-}])
-
-describe('Server Testing', function () {
-    it('should validate if server is running', function () {
-        return server.injectThen({
-                method: 'GET',
-                url: '/'
-            })
-            .then(
-                function (response) {
-                    assert.deepEqual(response.statusCode, 200);
-                }
-            )
-    })
-    it('should invalidate if server is running', function () {
-        return server.injectThen({
-                method: 'GET',
-                url: '/'
-            })
-            .then(
-                function (response) {
-                    assert.notEqual(response.statusCode, 400);
-                }
-            )
-    })
-})
-```
-
+    
+      const assert = require('chai').assert;
+      const server = require('../index.js');
+      const request = require('http');
+      
+      
+      server.register([{
+          register: require('inject-then')
+      }])
+      
+      describe('Server Testing', function () {
+          it('should validate if server is running', function () {
+              return server.injectThen({
+                      method: 'GET',
+                      url: '/'
+                  })
+                  .then(
+                      function (response) {
+                          assert.deepEqual(response.statusCode, 200);
+                      }
+                  )
+          })
+          it('should invalidate if server is running', function () {
+              return server.injectThen({
+                      method: 'GET',
+                      url: '/'
+                  })
+                  .then(
+                      function (response) {
+                          assert.notEqual(response.statusCode, 400);
+                      }
+                  )
+          })
+      })
+    
 
 - Once we are finished with creating our test for functional logic, we will run it dry and let it fail because currently their is no source code to test. In order to run mocha to start testing, we have to type `mocha` in the terminal.
 
@@ -170,32 +171,28 @@ describe('Server Testing', function () {
 
 - Now we will write the real function code, which our mocha test is going to check. You can copy below code in filename `index.js` - created in **Step 1**.
 
-
-
-```sh
-const hapi = require( 'hapi');
-const server = new hapi.Server()
-
-
-server.connection({
-  host:'localhost',
-  port:Number(process.env.PORT || 8080 )
-})
-
-server.route({
-    method:'GET',
-    path:'/',
-    handler: function (req,res){
-        return res("Testing hapi with mocha and chai")
-      }
-})
-
-server.start((err)=>{
-  if (err) console.log('error while connecting :'+err)
-})
-
-module.exports = server;
-```
+      const hapi = require( 'hapi');
+      const server = new hapi.Server()
+  
+  
+      server.connection({
+          host:'localhost',
+          port:Number(process.env.PORT || 8080 )
+      })
+  
+      server.route({
+          method:'GET',
+          path:'/',
+          handler: function (req,res){
+              return res("Testing hapi with mocha and chai")
+            }
+      })
+  
+      server.start((err)=>{
+        if (err) console.log('error while connecting :'+err)
+      })
+  
+      module.exports = server;
 
 
 - Aforementioned, we will re-run our mocha test again to check whether our code in `index.js` is working or not. So, type in terminal `mocha`
@@ -226,7 +223,7 @@ http://localhost:8080/
     ![browser output]({{ "/assets/browser.png" | absolute_url }})
 
 
-- so, we tested our API with mocha and chai; and ran it on local browser. Now,if we want to improve our code we can refactor it. Although our task is already completed.
+- So, we tested our API with mocha and chai; and ran it on local browser. Now,if we want to improve our code we can refactor it. Although our task is already completed.
 
 #### Source Code
 You can find source code of tutorial => **[here][gist]** 
